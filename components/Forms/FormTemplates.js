@@ -69,7 +69,7 @@ class AdminPortal extends React.Component {
                                                         dispatch(updateItems(item.formFormat.items))
                                                         dispatch(updateFormName(item.formFormat.formName))
 
-                                                        Router.push(`/patients/new`);
+                                                        Router.push(`/patients/new?id=${item._id}`);
                                                     } }
                                             >
                                                < MdAddCircleOutline />

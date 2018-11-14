@@ -11,10 +11,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/edit-form": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/patients/new": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
