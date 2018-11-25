@@ -39,7 +39,10 @@ class UserForm extends React.Component {
       loading: false,
       email: '',
       password: '',
-      role: ''
+      role: '',
+      ren: '',
+      firstName: '',
+      lastName: ''
   };
 
   componentDidMount() {
@@ -68,6 +71,26 @@ class UserForm extends React.Component {
     });
   };
 
+  submit = () => {
+    this.setState({loading: true});
+
+    const token = window.localStorage.getItem('token');
+    axios.post('https://smartapinode.herokuapp.com/users/signup', {
+        email: this.state.email,
+        password: this.state.password,
+        role: this.state.role,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName
+    },
+    {
+        headers: {"Authorization" : `Bearer ${token}`}
+    }
+    ).then((res) => {
+        console.log('---->', res.data);
+        this.setState({loading: false});
+    })
+  }
+
   render() {
     const { classes } = this.props
     const style = {
@@ -75,6 +98,15 @@ class UserForm extends React.Component {
             paddingLeft: '50px',
             paddingTop: '10px',
             backgroundColor: 'aliceblue'
+        },
+        textField: {
+            marginRight: '10px'
+        },
+        row: {
+            display: 'flex'
+        },
+        btn: {
+            paddingTop: '10px'
         }
     }
     return (
@@ -89,27 +121,46 @@ class UserForm extends React.Component {
                 (
                     <div style={style.wrapper}>
                         <form className={classes.container} noValidate>
-                            <div>
+                            <div style={style.row}>
                             <TextField
                                 label="Email"
-                                className={classes.textField}
+                                style={style.textField}
                                 value={this.state.email}
                                 onChange={this.handleChange('email')}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <TextField
+                                label="Password"
+                                type="password"
+                                style={style.textField}
+                                value={this.state.password}
+                                onChange={this.handleChange('password')}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            </div>
+
+                            <div style={style.row}>
+                            <TextField
+                                label="First Name"
+                                style={style.textField}
+                                value={this.state.firstName}
+                                onChange={this.handleChange('firstName')}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <TextField
+                                label="Last Name"
+                                style={style.textField}
+                                value={this.state.lastName}
+                                onChange={this.handleChange('lastName')}
                                 margin="normal"
                                 variant="outlined"
                             />
                             </div>
 
                             <div>
-                            <TextField
-                                label="Password"
-                                type="password"
-                                className={classes.textField}
-                                value={this.state.password}
-                                onChange={this.handleChange('password')}
-                                margin="normal"
-                                variant="outlined"
-                            />
                             </div>
 
                             <div>
@@ -140,8 +191,27 @@ class UserForm extends React.Component {
                                     <MenuItem value={'patient'}>Patient</MenuItem>
                                     <MenuItem value={'pwa'}>PWA</MenuItem>
                                 </Select>
+                                {/* nurse options */}
+                                {
+                                    this.state.role === 'nurse' ? (
+                                        <div>
+                                        <TextField
+                                            label="Registration Number"
+                                            className={classes.textField}
+                                            value={this.state.ren}
+                                            onChange={this.handleChange('ren')}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+                                        </div>
+                                    ) : null
+                                }
 
-
+                            </div>
+                            <div style={style.btn}>
+                                <Button  onClick={this.submit} variant="contained" color="primary">
+                                    Submit
+                                </Button>
                             </div>
                         </form>
                     </div>

@@ -11,11 +11,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/mainflow/users": [
+    "/mainflow/users/new": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/mainflow/users/new": [
+    "/mainflow/users": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
