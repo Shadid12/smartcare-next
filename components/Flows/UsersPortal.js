@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import Router from 'next/router';
 
 import {
     MdPeople
@@ -109,7 +110,13 @@ class UsersPortal extends React.Component {
                                                 <MdPeople />
                                             </ListItemIcon>
                                             <ListItemText inset primary={`${item.label}`} />
-                                            <Button variant="contained" style={styles.button}>
+                                            <Button 
+                                                variant="contained" 
+                                                style={styles.button}
+                                                onClick={() => {
+                                                    Router.push(`/mainflow/users/new`)
+                                                }}
+                                            >
                                                 Add
                                             </Button>
                                             <Button variant="contained" style={styles.button}>

@@ -8,6 +8,10 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 import {
     MdPeople
@@ -33,7 +37,9 @@ const styles = theme => ({
 class UserForm extends React.Component {  
   state = {
       loading: false,
-      email: ''
+      email: '',
+      password: '',
+      role: ''
   };
 
   componentDidMount() {
@@ -53,9 +59,6 @@ class UserForm extends React.Component {
                 }
             })
       }
-      if(this.props.userRole === 'admin') {
-          this.setState({ listItems: adminItems });
-      }
   }
 
 
@@ -67,6 +70,13 @@ class UserForm extends React.Component {
 
   render() {
     const { classes } = this.props
+    const style = {
+        wrapper: {
+            paddingLeft: '50px',
+            paddingTop: '10px',
+            backgroundColor: 'aliceblue'
+        }
+    }
     return (
         <div className={classes.root}>
             <List
@@ -77,17 +87,62 @@ class UserForm extends React.Component {
                     <CircularProgress className={classes.progress} color="secondary" />
                 ) : 
                 (
-                    <div>
-                        <form className={classes.container} noValidate autoComplete="off">
+                    <div style={style.wrapper}>
+                        <form className={classes.container} noValidate>
+                            <div>
                             <TextField
-                                id="outlined-name"
-                                label="Name"
+                                label="Email"
                                 className={classes.textField}
-                                value={this.state.name}
+                                value={this.state.email}
                                 onChange={this.handleChange('email')}
                                 margin="normal"
                                 variant="outlined"
                             />
+                            </div>
+
+                            <div>
+                            <TextField
+                                label="Password"
+                                type="password"
+                                className={classes.textField}
+                                value={this.state.password}
+                                onChange={this.handleChange('password')}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            </div>
+
+                            <div>
+
+                                <InputLabel
+                                    ref={ref => {
+                                    this.InputLabelRef = ref;
+                                    }}
+                                    htmlFor="outlined-age-simple"
+                                >
+                                    Role
+                                </InputLabel>
+                                <Select
+                                    value={this.state.role}
+                                    onChange={(e) => {
+                                        this.setState({ role: e.target.value })
+                                    }}
+                                    input={
+                                    <OutlinedInput
+                                        labelWidth={this.state.labelWidth}
+                                        name="role"
+                                        id="outlined-age-simple"
+                                    />
+                                    }
+                                >
+                                    <MenuItem value={'admin'}>Admin</MenuItem>
+                                    <MenuItem value={'nurse'}>Nurse</MenuItem>
+                                    <MenuItem value={'patient'}>Patient</MenuItem>
+                                    <MenuItem value={'pwa'}>PWA</MenuItem>
+                                </Select>
+
+
+                            </div>
                         </form>
                     </div>
                 )
