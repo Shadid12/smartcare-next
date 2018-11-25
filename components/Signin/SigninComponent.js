@@ -14,6 +14,11 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Router from 'next/router';
 import { connect } from 'react-redux';
+import axios from 'axios';
+
+
+// components
+import Loader from './Loader';
 
 // action
 import { 
@@ -55,19 +60,21 @@ const styles = theme => ({
 export class SigninComponent extends React.Component {
     state = {
         username: '',
-        password: ''
+        password: '',
+        loading: false
     }
 
     handleForm = () => {
-        if (this.state.username === 'test' && this.state.password ==='12345' ) {
-            const {dispatch} = this.props
-            dispatch(setUserRole('admin'))
-            Router.push(`/profile/dash`)
-        }
-        if (this.state.username === 'nurse' && this.state.password ==='12345' ) {
-            Router.push(`/profile/dash`)
-        }
-
+        this.setState({ loading: true });
+        axios.post('https://smartapinode.herokuapp.com/users/login', 
+            {
+                "email": this.state.username,
+                "password": this.state.password,
+            }).then((res) => {
+                window.localStorage.setItem('token', res.data.token);
+                window.localStorage.setItem('role', res.data.role);
+                Router.push(`/mainflow/main`);
+            });
     }
 
     handleChange = name => event => {
@@ -88,43 +95,49 @@ export class SigninComponent extends React.Component {
                 <Typography component="h1" variant="h5">
                 Sign in
                 </Typography>
-                <form className={classes.form}>
-                <FormControl margin="normal" required fullWidth>
-                    <InputLabel htmlFor="email">Email Address</InputLabel>
-                    <Input 
-                        id="email" 
-                        name="email" 
-                        autoComplete="email" 
-                        autoFocus 
-                        value={this.state.userName}
-                        onChange={this.handleChange('username')}
-                    />
-                </FormControl>
-                <FormControl margin="normal" required fullWidth>
-                    <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input
-                        name="password"
-                        type="password"
-                        id="password"
-                        value={this.state.password}
-                        autoComplete="current-password"
-                        onChange={this.handleChange('password')}
-                    />
-                </FormControl>
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                />
-                <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={this.handleForm}
-                >
-                    Sign in
-                </Button>
-                </form>
+                {!this.state.loading ? (
+                    <form className={classes.form}>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="email">Email Address</InputLabel>
+                            <Input 
+                                id="email" 
+                                name="email" 
+                                autoComplete="email" 
+                                autoFocus 
+                                value={this.state.userName}
+                                onChange={this.handleChange('username')}
+                            />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <Input
+                                name="password"
+                                type="password"
+                                id="password"
+                                value={this.state.password}
+                                autoComplete="current-password"
+                                onChange={this.handleChange('password')}
+                            />
+                        </FormControl>
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={this.handleForm}
+                    >
+                        Sign in
+                    </Button>
+                    </form>
+                
+                ) : 
+                <Loader />
+                }
+                
             </Paper>
             </main>
         </React.Fragment>
