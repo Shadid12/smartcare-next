@@ -72,7 +72,9 @@ export class SigninComponent extends React.Component {
                 "password": this.state.password,
             }).then((res) => {
                 window.localStorage.setItem('token', res.data.token);
-                window.localStorage.setItem('role', res.data.role);
+                const {dispatch} = this.props
+                dispatch(setUserRole(res.data.role))
+
                 Router.push(`/mainflow/main`);
             });
     }
