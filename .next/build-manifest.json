@@ -15,8 +15,10 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/mainflow/users": [
+    "/mainflow/users/nurses": [
       "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
       "static/runtime/main.js"
     ]
   }
