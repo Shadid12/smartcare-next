@@ -12,6 +12,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router';
 
+
 import {
     MdPeople
 } from 'react-icons/md'
@@ -42,20 +43,24 @@ class UsersPortal extends React.Component {
   componentDidMount() {
       const adminItems = [
             {
-                _id: '1232130094',
-                label: 'Patients'
+                _id: '123213k094',
+                label: 'Nurses',
+                route: `/mainflow/users/nurses`
             },
             {
-                _id: '123020392',
-                label: 'Doctors'
+                _id: '123020492',
+                label: 'Doctors',
+                route: `/mainflow/users`
             },
             {
               _id: '1230122392',
-              label: 'PSW'
+              label: 'PSW',
+              route: `/mainflow/users`
             },
             {
               _id: '123020392',
-              label: 'Other'
+              label: 'Other',
+              route: `/mainflow/users`
             }
       ]
 
@@ -104,12 +109,20 @@ class UsersPortal extends React.Component {
                                     }
                                 }
                                 return (
-                                    <div style={styles.wrapper}>
+                                    <div style={styles.wrapper} key={item._id}>
                                         <ListItem>
                                             <ListItemIcon>
                                                 <MdPeople />
                                             </ListItemIcon>
                                             <ListItemText inset primary={`${item.label}`} />
+                                            <Button variant="contained" 
+                                                    style={styles.button}
+                                                    onClick={() => {
+                                                        Router.push(`/mainflow/users/nurses`)
+                                                    }}
+                                            >
+                                                Show All
+                                            </Button>
                                             <Button 
                                                 variant="contained" 
                                                 style={styles.button}
@@ -118,12 +131,6 @@ class UsersPortal extends React.Component {
                                                 }}
                                             >
                                                 Add
-                                            </Button>
-                                            <Button variant="contained" style={styles.button}>
-                                                Remove
-                                            </Button>
-                                            <Button variant="contained" style={styles.button}>
-                                                Edit
                                             </Button>
                                         </ListItem>
                                     </div>

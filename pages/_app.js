@@ -7,6 +7,8 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from './getPageContext';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import './app.css';
+
 class MyApp extends App {
 
   constructor(props) {

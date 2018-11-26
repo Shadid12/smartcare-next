@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -34,8 +35,6 @@ class UsersList extends React.Component {
   }
 
   render() {
-    const data = this.state.data;
-
     const columns = [
         {
             Header: 'First Name',
@@ -86,15 +85,23 @@ class UsersList extends React.Component {
             alignItems: 'center'
         }
     }
-    return (
-        <div style={styles.table}>
-            <h3>Nurses List</h3>
-            <ReactTable
-                data={data}
-                columns={columns}
-            />
-        </div>
-    );
+    if(this.state.data.length === 0) {
+        return(
+            <div style={styles.table}>
+                <CircularProgress color="secondary" />
+            </div>
+        )
+    } else {
+        return (
+            <div style={styles.table}>
+                <h3>Nurses List</h3>
+                <ReactTable
+                    data={this.state.data}
+                    columns={columns}
+                />
+            </div>
+        );
+    }
   }
 }
 

@@ -12,6 +12,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Router from 'next/router';
 
 import {
     MdPeople
@@ -80,14 +81,15 @@ class UserForm extends React.Component {
         password: this.state.password,
         role: this.state.role,
         firstName: this.state.firstName,
-        lastName: this.state.lastName
+        lastName: this.state.lastName,
+        ren: this.state.ren
     },
     {
         headers: {"Authorization" : `Bearer ${token}`}
     }
     ).then((res) => {
         console.log('---->', res.data);
-        this.setState({loading: false});
+        Router.push(`/mainflow/users/nurses`);
     })
   }
 
