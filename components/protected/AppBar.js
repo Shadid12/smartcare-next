@@ -116,6 +116,11 @@ class AppBarMain extends React.Component {
     this.handleMobileMenuClose();
   };
 
+  logOut = () => {
+    window.localStorage.setItem('token', '');
+    Router.push('/login');
+  }
+
   handleMobileMenuOpen = event => {
     this.setState({ mobileMoreAnchorEl: event.currentTarget });
   };
@@ -140,7 +145,7 @@ class AppBarMain extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.logOut}>Logout</MenuItem>
       </Menu>
     );
 

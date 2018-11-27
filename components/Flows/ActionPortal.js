@@ -51,7 +51,7 @@ class ActionPortal extends React.Component {
             {
                 _id: '1232130094',
                 label: 'Settings',
-                link: ''
+                link: '/mainflow/main'
             },
             {
                 _id: '123020392',
@@ -61,7 +61,7 @@ class ActionPortal extends React.Component {
             {
               _id: '1230122392',
               label: 'Billings',
-              link: ''
+              link: '/mainflow/main'
             },
             {
               _id: '123020392',
@@ -71,7 +71,7 @@ class ActionPortal extends React.Component {
             {
               _id: '123020392',
               label: 'Scheduling',
-              link: ''
+              link: '/mainflow/main'
             }
       ]
       const nurseItems = [
@@ -160,7 +160,7 @@ class ActionPortal extends React.Component {
                         this.props.userRole === 'nurse' ? (
                             <SearchTable />
                         ) : (
-                            <div>Hola</div>
+                            <div>Admin Portal Will Go here</div>
                         )
                     }
                     </Paper>
