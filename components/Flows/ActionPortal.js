@@ -15,6 +15,8 @@ import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import SearchTable from './SearchTable';
+
 // action
 import { 
     setUserRole
@@ -75,15 +77,13 @@ class ActionPortal extends React.Component {
       const nurseItems = [
         {
             _id: '123232194',
-            label: 'Add New Patient'
+            label: 'Add New Patient',
+            link: '/mainflow/main'
         },
         {
             _id: '123232194',
-            label: 'Assesments'
-        },
-        {
-            _id: '123222194',
-            label: 'Patients List'
+            label: 'Assesments',
+            link: '/mainflow/assements'
         }
       ]
 
@@ -158,7 +158,7 @@ class ActionPortal extends React.Component {
                     <Paper className={classes.paper}>
                     {
                         this.props.userRole === 'nurse' ? (
-                            <div>Table</div>
+                            <SearchTable />
                         ) : (
                             <div>Hola</div>
                         )
