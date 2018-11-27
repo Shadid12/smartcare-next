@@ -12,6 +12,9 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import axios from 'axios';
 
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 // action
 import { 
     setUserRole
@@ -26,6 +29,11 @@ const styles = theme => ({
         backgroundColor: 'aliceblue',
         paddingLeft: '100px',
         paddingTop: '10px'
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
     }
   },
 });
@@ -56,7 +64,7 @@ class ActionPortal extends React.Component {
             {
               _id: '123020392',
               label: 'Forms',
-              link: ''
+              link: '/admin'
             },
             {
               _id: '123020392',
@@ -71,7 +79,11 @@ class ActionPortal extends React.Component {
         },
         {
             _id: '123232194',
-            label: 'See Available Forms'
+            label: 'Assesments'
+        },
+        {
+            _id: '123222194',
+            label: 'Patients List'
         }
       ]
 
@@ -106,37 +118,54 @@ class ActionPortal extends React.Component {
     const { classes } = this.props
     return (
         <div className={classes.root}>
-            <List
-            component="nav"
-            subheader={<ListSubheader component="div">Action Items</ListSubheader>}
-            >
-                {this.state.loading ? (
-                    <CircularProgress className={classes.progress} color="secondary" />
-                ) : 
-                (
-                    <div>
-                        {
-                            this.state.listItems.map((item) => {
-                                return (
-                                    <div>
-                                        <ListItem button onClick={
-                                            () => {
-                                                Router.push(`${item.link}`);
-                                            }
-                                        }>
-                                            <ListItemIcon>
-                                                <SendIcon />
-                                            </ListItemIcon>
-                                            <ListItemText inset primary={`${item.label}`} />
-                                        </ListItem>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                )
-                }
-            </List>
+            <Grid container spacing={24}>
+                <Grid item xs={4}>
+                    <Paper className={classes.paper}>
+                    <List
+                        component="nav"
+                        subheader={<ListSubheader component="div">Action Items</ListSubheader>}
+                    >
+                            {this.state.loading ? (
+                                <CircularProgress className={classes.progress} color="secondary" />
+                            ) : 
+                            (
+                                <div>
+                                    {
+                                        this.state.listItems.map((item) => {
+                                            return (
+                                                <div>
+                                                    <ListItem button onClick={
+                                                        () => {
+                                                            Router.push(`${item.link}`);
+                                                        }
+                                                    }>
+                                                        <ListItemIcon>
+                                                            <SendIcon />
+                                                        </ListItemIcon>
+                                                        <ListItemText inset primary={`${item.label}`} />
+                                                    </ListItem>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            )
+                            }
+                    </List>
+                    </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                    <Paper className={classes.paper}>
+                    {
+                        this.props.userRole === 'nurse' ? (
+                            <div>Table</div>
+                        ) : (
+                            <div>Hola</div>
+                        )
+                    }
+                    </Paper>
+                </Grid>
+            </Grid>
         </div>
     );
   }

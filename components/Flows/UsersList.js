@@ -15,23 +15,20 @@ import {
 
 class UsersList extends React.Component {  
   state = {
-      loading: false,
+      loading: true,
       data: []
   };
 
   componentDidMount() {
-
-      if(!this.props.userRole) {
-          this.setState({ loading: true });
-          // Get the thing from here
-          const token = window.localStorage.getItem('token');
-          axios.get('https://smartapinode.herokuapp.com/users/nurses', 
-          { headers: {"Authorization" : `Bearer ${token}`} })
-            .then((res) => {
-                console.log('----Nurses', res.data);
-                this.setState({ data: res.data.nurses })
-            })
-       }
+    this.setState({ loading: true });
+    // Get the thing from here
+    const token = window.localStorage.getItem('token');
+    axios.get('https://smartapinode.herokuapp.com/users/nurses', 
+    { headers: {"Authorization" : `Bearer ${token}`} })
+    .then((res) => {
+        console.log('----Nurses', res.data);
+        this.setState({ data: res.data.nurses, loading:false })
+    })
   }
 
   render() {
@@ -85,7 +82,7 @@ class UsersList extends React.Component {
             alignItems: 'center'
         }
     }
-    if(this.state.data.length === 0) {
+    if(this.state.loading) {
         return(
             <div style={styles.table}>
                 <CircularProgress color="secondary" />
