@@ -25,7 +25,7 @@ class Index extends React.Component {
     return (
       <div>
           <AppBar />
-          <FormReader formID={this.props.query.id}/>
+          <FormReader formID={this.props.query.id} isSubmitable/>
       </div>
     )
   }

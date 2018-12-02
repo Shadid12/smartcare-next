@@ -13,15 +13,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/admin": [
+    "/forms/show-templates": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/test": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/form-consumer": [
+    "/patients/new": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

@@ -18,6 +18,7 @@ import {
     updateItems,
     updateFormName
 } from '../../store'
+import { Button } from '@material-ui/core';
 
 class FormReader extends React.Component {
     state = {
@@ -196,6 +197,19 @@ class FormReader extends React.Component {
                         })
                     }
                 </div>
+
+                <div className={classes.row}>
+                    {
+                        this.props.isSubmitable ? (
+                            <Button variant="contained" 
+                                    color="primary"
+                                    className={classes.submit}
+                            >
+                                Submit
+                            </Button>
+                        ) : null
+                    }
+                </div>
             </div>
         )
     }
@@ -220,6 +234,9 @@ const styles = theme => ({
     formControl: {
         margin: theme.spacing.unit,
         minWidth: 270,
+    },
+    submit: {
+        marginTop: '10px'
     }
 });
 
