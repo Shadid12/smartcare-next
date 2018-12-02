@@ -49,7 +49,7 @@ class AdminPortal extends React.Component {
                     spacing={24}
                     className={classes.container}
                 >
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
                         <Paper className={classes.root} elevation={1}>
                             <Typography variant="h5" component="h3">
                                 Existing Forms
@@ -78,6 +78,60 @@ class AdminPortal extends React.Component {
                                             >
                                                 <MdModeEdit />
                                             </Button>
+                                            {
+                                                item.formFormat.isLive ? (
+                                                    <div>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            aria-label="Delete" 
+                                                            onClick={ () => {
+                                                                axios.delete(`https://smartapinode.herokuapp.com/custom-forms/${item._id}`)
+                                                                .then((res) => {
+                                                                    const newItems = this.state.existingForms;
+                                                                    let index = newItems.indexOf(item);
+                                                                    newItems.splice(index, 1);
+                                                                    this.setState({ existingForms: newItems });
+                                                                    console.log('--->', res);
+                                                                })
+                                                            } }
+                                                        >
+                                                            Delete
+                                                        </Button>
+                                                    </div>
+                                                ) : (
+                                                    <Button variant="contained" 
+                                                            color="primary" 
+                                                            aria-label="Edit" 
+                                                            className={classes.button}
+                                                            onClick={ () => {
+                                                                // const token = window.localStorage.getItem('token');
+                                                                // console.log('Fuck it ', token);
+                                                                item.formFormat.isLive = true;
+                                                                const formFormat = item.formFormat;
+                                                                console.log('formFormat', formFormat);
+                                                                
+                                                                const newItems = this.state.existingForms;
+                                                                let index = newItems.indexOf(item);
+                                                                newItems[index] = item;
+                                                                this.setState({ existingForms: newItems });
+                                                                
+                                                                axios.patch(`https://smartapinode.herokuapp.com/custom-forms/${item._id}`, {
+                                                                    formFormat: formFormat
+                                                                })
+                                                                    .then((res) => {
+                                                                        const newItems = this.state.existingForms;
+                                                                        let index = newItems.indexOf(item);
+                                                                        newItems[index] = item;
+                                                                        console.log('---->', res)
+                                                                        this.setState({ existingForms: newItems });
+                                                                })
+                                                            } }
+                                                    >
+                                                        Make Live
+                                                    </Button>
+                                                )
+                                            }
                                         </ListItem>
                                     )
                                 })
@@ -85,7 +139,7 @@ class AdminPortal extends React.Component {
                             </List>
                         </Paper>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Paper className={classes.root} elevation={1}>
                             <Typography variant="h5" component="h3">
                                 Admin Actions
@@ -138,6 +192,9 @@ const styles = theme => ({
         paddingTop: '50px',
         paddingLeft: '10px',
         paddingRight: '10px'
+    },
+    button: {
+        marginRight: '5px'
     }
 });
 

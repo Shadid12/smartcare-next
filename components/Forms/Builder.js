@@ -112,7 +112,8 @@ class Builder extends React.Component {
             "org_id": "Cal Naowa",
             "formFormat": {
                 "formName": this.state.formName,
-                "items": this.props.items
+                "items": this.props.items,
+                "isLive": false
             }
         }).then((res) => {
             Router.push(`/form-consumer`);

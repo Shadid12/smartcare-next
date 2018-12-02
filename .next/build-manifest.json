@@ -13,16 +13,16 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/mainflow/main": [
+    "/admin": [
       "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/mainflow/assements": [
+    "/test": [
       "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+    "/form-consumer": [
+      "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
   }
