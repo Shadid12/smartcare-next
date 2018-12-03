@@ -53,29 +53,31 @@ class AdminPortal extends React.Component {
                             <List component="nav">
                             {
                                 this.state.existingForms.map((item) => {
-                                    return(
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <MdClearAll />
-                                            </ListItemIcon>
-                                            <ListItemText>{item.formFormat.formName}</ListItemText>
-                                            <Button variant="outlined" 
-                                                    color="primary" 
-                                                    aria-label="Edit" 
-                                                    className={classes.button}
-                                                    onClick={ () => {
-
-                                                        const {dispatch} = this.props
-                                                        dispatch(updateItems(item.formFormat.items))
-                                                        dispatch(updateFormName(item.formFormat.formName))
-
-                                                        Router.push(`/patients/new?id=${item._id}`);
-                                                    } }
-                                            >
-                                               < MdAddCircleOutline />
-                                            </Button>
-                                        </ListItem>
-                                    )
+                                    if(item.formFormat.isLive) {
+                                        return(
+                                            <ListItem>
+                                                <ListItemIcon>
+                                                    <MdClearAll />
+                                                </ListItemIcon>
+                                                <ListItemText>{item.formFormat.formName}</ListItemText>
+                                                <Button variant="outlined" 
+                                                        color="primary" 
+                                                        aria-label="Edit" 
+                                                        className={classes.button}
+                                                        onClick={ () => {
+    
+                                                            const {dispatch} = this.props
+                                                            dispatch(updateItems(item.formFormat.items))
+                                                            dispatch(updateFormName(item.formFormat.formName))
+    
+                                                            Router.push(`/patients/new?id=${item._id}`);
+                                                        } }
+                                                >
+                                                   < MdAddCircleOutline />
+                                                </Button>
+                                            </ListItem>
+                                        )
+                                    }
                                 })
                             }
                             </List>

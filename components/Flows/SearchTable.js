@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
 import axios from 'axios';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -17,10 +23,15 @@ import { MdClearAll,
 
 
 class SearchTable extends React.Component {
-    state = {}
+    state = {
+        patients: []
+    }
 
     componentDidMount() {
-
+        axios.get('https://smartapinode.herokuapp.com/patients/')
+            .then((res) => {
+                this.setState({ patients: res.data.patients })
+        })
     }
 
     render() {
@@ -61,29 +72,55 @@ class SearchTable extends React.Component {
                 accessor: 'age'
             }
         ]
-        return(
-            <div>
-                <h3>Fake Patients List</h3>
-                <ReactTable
-                    data={data}
-                    filterable
-                    columns={columns}
-                    getTdProps={(state, rowInfo, column, instance) => {
-                        return {
-                          onClick: (e, handleOriginal) => {
-                            console.log("A Td Element was clicked!");
-                            console.log("it produced this event:", e);
-                            console.log("It was in this column:", column);
-                            console.log("It was in this row:", rowInfo);
-                            console.log("It was in this table instance:", instance);
+        // return(
+        //     <div>
+        //         <h3>Fake Patients List</h3>
+        //         <ReactTable
+        //             data={data}
+        //             filterable
+        //             columns={columns}
+        //             getTdProps={(state, rowInfo, column, instance) => {
+        //                 return {
+        //                   onClick: (e, handleOriginal) => {
+        //                     console.log("A Td Element was clicked!");
+        //                     console.log("it produced this event:", e);
+        //                     console.log("It was in this column:", column);
+        //                     console.log("It was in this row:", rowInfo);
+        //                     console.log("It was in this table instance:", instance);
                     
-                            if (handleOriginal) {
-                              handleOriginal();
-                            }
-                          }
-                        };
-                      }}
-                />
+        //                     if (handleOriginal) {
+        //                       handleOriginal();
+        //                     }
+        //                   }
+        //                 };
+        //               }}
+        //         />
+        //     </div>
+        // )
+
+        return (
+            <div>
+                <h3> Real Patients List</h3>
+                <List component="nav">
+                    {
+                        this.state.patients.map(patient => {
+                            return(
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <MdPeople />
+                                    </ListItemIcon>
+                                    <ListItemText 
+                                        primary=
+                                            { 
+                                                `${patient.patientForm.items[0].answer} 
+                                                ${patient.patientForm.items[1].answer}` 
+                                            }
+                                    />
+                                </ListItem>
+                            )
+                        })
+                    }
+                </List>
             </div>
         )
     }

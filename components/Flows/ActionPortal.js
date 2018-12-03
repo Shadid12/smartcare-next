@@ -78,7 +78,7 @@ class ActionPortal extends React.Component {
         {
             _id: '123232194',
             label: 'Add New Patient',
-            link: '/mainflow/main'
+            link: '/forms/show-templates'
         },
         {
             _id: '123232194',

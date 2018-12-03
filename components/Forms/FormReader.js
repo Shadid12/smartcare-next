@@ -20,6 +20,8 @@ import {
 } from '../../store'
 import { Button } from '@material-ui/core';
 
+import Router from 'next/router';
+
 class FormReader extends React.Component {
     state = {
         items: []
@@ -37,8 +39,7 @@ class FormReader extends React.Component {
                 this.setState({
                     items: this.props.items
                 })
-
-            })
+        })
     }
 
     handleSwitchChange = (e) => (index) => {
@@ -63,6 +64,13 @@ class FormReader extends React.Component {
                                     return(
                                         <TextField 
                                             label={item.q_label}
+                                            onChange={(e) => {
+                                                let itemsCopy = this.state.items;
+                                                itemsCopy[index].answer = e.target.value
+                                                this.setState({
+                                                    items: itemsCopy
+                                                })
+                                            }}
                                         />
                                     )
                                 case 'radio':
@@ -204,6 +212,15 @@ class FormReader extends React.Component {
                             <Button variant="contained" 
                                     color="primary"
                                     className={classes.submit}
+                                    onClick={() => {
+                                        axios.post('https://smartapinode.herokuapp.com/patients', {
+                                            "formFormat": {
+                                                "items": this.state.items
+                                            }
+                                        }).then((res) => {
+                                            Router.push('/mainflow/main')
+                                        })
+                                    }}
                             >
                                 Submit
                             </Button>

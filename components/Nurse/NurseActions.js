@@ -63,7 +63,10 @@ class AdminPortal extends React.Component {
                                     <ListItemIcon>
                                         <MdPeople />
                                     </ListItemIcon>
-                                    <ListItemText>Add New Patient</ListItemText>
+                                    <ListItemText onClick={() => {
+                                        Router.push('/forms/show-templates')
+                                    }}
+                                    >Add New Patient</ListItemText>
                                 </ListItem>
                                 <ListItem button>
                                     <ListItemIcon>
