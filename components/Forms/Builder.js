@@ -116,7 +116,7 @@ class Builder extends React.Component {
                 "isLive": false
             }
         }).then((res) => {
-            Router.push(`/form-consumer`);
+            Router.push(`/admin`);
         })
     }
 

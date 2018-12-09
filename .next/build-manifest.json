@@ -13,13 +13,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/mainflow/main": [
+    "/login": [
       "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/patients/new": [
+    "/patient-login": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

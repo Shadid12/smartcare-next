@@ -57,7 +57,7 @@ const styles = theme => ({
   },
 });
 
-export class SigninComponent extends React.Component {
+export class PatientSignin extends React.Component {
     state = {
         username: '',
         password: '',
@@ -66,17 +66,18 @@ export class SigninComponent extends React.Component {
 
     handleForm = () => {
         this.setState({ loading: true });
-        axios.post('https://smartapinode.herokuapp.com/users/login', 
-            {
-                "email": this.state.username,
-                "password": this.state.password,
-            }).then((res) => {
-                window.localStorage.setItem('token', res.data.token);
-                const {dispatch} = this.props
-                dispatch(setUserRole(res.data.role))
+        console.log('Patinet Login');
+        // axios.post('https://smartapinode.herokuapp.com/users/login', 
+        //     {
+        //         "email": this.state.username,
+        //         "password": this.state.password,
+        //     }).then((res) => {
+        //         window.localStorage.setItem('token', res.data.token);
+        //         const {dispatch} = this.props
+        //         dispatch(setUserRole(res.data.role))
 
-                Router.push(`/mainflow/main`);
-            });
+        //         Router.push(`/mainflow/main`);
+        //     });
     }
 
     handleChange = name => event => {
@@ -95,7 +96,7 @@ export class SigninComponent extends React.Component {
                 <LockIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                Clinician Sign in
+                Patient Login
                 </Typography>
                 {!this.state.loading ? (
                     <form className={classes.form}>
@@ -139,10 +140,10 @@ export class SigninComponent extends React.Component {
                         fullWidth
                         className={classes.submit}
                         onClick={() => {
-                            Router.push('/patient-login')
+                            Router.push('/login')
                         }}
                     >
-                        Patient Signin
+                        Clinician Signin
                     </Button>
                     </form>
                 
@@ -157,7 +158,7 @@ export class SigninComponent extends React.Component {
     }
 }
 
-SigninComponent.propTypes = {
+PatientSignin.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -166,4 +167,4 @@ function mapStateToProps (state) {
     return { userRole }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(SigninComponent));
+export default connect(mapStateToProps)(withStyles(styles)(PatientSignin));
