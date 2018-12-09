@@ -67,17 +67,19 @@ export class PatientSignin extends React.Component {
     handleForm = () => {
         this.setState({ loading: true });
         console.log('Patinet Login');
-        // axios.post('https://smartapinode.herokuapp.com/users/login', 
-        //     {
-        //         "email": this.state.username,
-        //         "password": this.state.password,
-        //     }).then((res) => {
-        //         window.localStorage.setItem('token', res.data.token);
-        //         const {dispatch} = this.props
-        //         dispatch(setUserRole(res.data.role))
-
-        //         Router.push(`/mainflow/main`);
-        //     });
+        axios.post('https://smartapinode.herokuapp.com/patients/login', 
+            {
+                "email": this.state.username,
+                "password": this.state.password,
+            }).then((res) => {
+                window.localStorage.setItem('token', res.data.token);
+                const {dispatch} = this.props
+                dispatch(setUserRole(res.data.role))
+                console.log('I am here');
+                Router.push(`/mainflow/patient-profile`);
+            }).catch(err => {
+                console.log('Show me the Error', err);
+            })
     }
 
     handleChange = name => event => {
