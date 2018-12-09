@@ -185,7 +185,9 @@ class AppBarMain extends React.Component {
         >
           Admin Portal
         </Button>
-      ) : 
+      ) : null 
+      
+      this.props.userRole === 'nurse' ?
       (
         <Button 
           variant="contained" 
@@ -197,7 +199,8 @@ class AppBarMain extends React.Component {
         >
           Nurse Portal
         </Button>
-      )
+      ) : null 
+
 
     const renderMobileMenu = (
       <Menu

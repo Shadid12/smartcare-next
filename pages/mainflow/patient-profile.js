@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import AppBar from '../../components/protected/AppBar'
 
+import ProfileFeed from '../../components/Flows/Patient/ProfileFeed'
+
 
 class Index extends React.Component {
   constructor(props) {
@@ -15,9 +17,7 @@ class Index extends React.Component {
     return (
       <div>
           <AppBar />
-          <div>
-              This is the patient Profile
-          </div>
+          <ProfileFeed />
       </div>
     )
   }
