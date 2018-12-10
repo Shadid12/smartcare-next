@@ -1,16 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import AppBar from '../../components/protected/AppBar'
-
 import ProfileFeed from '../../components/Flows/Patient/ProfileFeed'
 import ProfileDetails from '../../components/Flows/Patient/ProfileDetails'
+import axios from 'axios';
 
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1
     }
   }
 
