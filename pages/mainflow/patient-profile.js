@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import AppBar from '../../components/protected/AppBar'
 
 import ProfileFeed from '../../components/Flows/Patient/ProfileFeed'
+import ProfileDetails from '../../components/Flows/Patient/ProfileDetails'
 
 
 class Index extends React.Component {
@@ -16,11 +17,24 @@ class Index extends React.Component {
   render () {
     return (
       <div>
-          <AppBar />
-          <ProfileFeed />
+        <AppBar />
+        {
+          this.props.patientProfile === 1 ? (
+            <ProfileDetails />
+          )
+          :
+          (
+            <ProfileFeed />
+          )
+        }
       </div>
     )
   }
 }
 
-export default connect()(Index)
+function mapStateToProps (state) {
+  const  { userRole , patientProfile} = state
+  return { userRole , patientProfile}
+}
+
+export default connect(mapStateToProps)(Index)

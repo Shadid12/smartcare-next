@@ -18,6 +18,12 @@ import Button from '@material-ui/core/Button';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 
+
+// action
+import { 
+  changePatientProfile
+} from '../../store'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -103,6 +109,7 @@ class AppBarMain extends React.Component {
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
+    console.log('SHow me', this.state.anchorEl);
   };
 
   handleNoticeMenuOpen = event => {
@@ -119,6 +126,16 @@ class AppBarMain extends React.Component {
   logOut = () => {
     window.localStorage.setItem('token', '');
     Router.push('/login');
+  }
+
+  profileClicked = () => {
+    const {dispatch} = this.props;
+    let toChange = 0;
+    if(this.props.patientProfile === 0) {
+      toChange = 1;
+    }
+    dispatch(changePatientProfile(toChange));
+    this.handleMenuClose();
   }
 
   handleMobileMenuOpen = event => {
@@ -144,7 +161,7 @@ class AppBarMain extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={this.profileClicked}>Profile</MenuItem>
         <MenuItem onClick={this.logOut}>Logout</MenuItem>
       </Menu>
     );
@@ -293,8 +310,8 @@ AppBarMain.propTypes = {
 };
 
 function mapStateToProps (state) {
-  const  { userRole } = state
-  return { userRole }
+  const  { userRole , patientProfile} = state
+  return { userRole , patientProfile}
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(AppBarMain));

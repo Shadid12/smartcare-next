@@ -21036,7 +21036,7 @@ function getPageContext() {
 /*!******************!*\
   !*** ./store.js ***!
   \******************/
-/*! exports provided: actionTypes, reducer, serverRenderClock, decrementCount, resetCount, changeName, changeLastName, changeAge, changeGender, changeAllergies, changePrimaryDiagonosis, changeEmergencyContact, changePhysician, deleteField, newPatinetAction, updateDenture, updateConcent, updateItems, updateFormName, setUserRole, initializeStore */
+/*! exports provided: actionTypes, reducer, serverRenderClock, decrementCount, resetCount, changeName, changeLastName, changeAge, changeGender, changeAllergies, changePrimaryDiagonosis, changeEmergencyContact, changePhysician, deleteField, newPatinetAction, updateDenture, updateConcent, updateItems, updateFormName, setUserRole, changePatientProfile, initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21061,6 +21061,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateItems", function() { return updateItems; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateFormName", function() { return updateFormName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUserRole", function() { return setUserRole; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changePatientProfile", function() { return changePatientProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
@@ -21083,7 +21084,8 @@ var exampleInitialState = {
   }],
   newPatient: {},
   items: [],
-  userRole: ''
+  userRole: '',
+  patientProfile: 0
 };
 var actionTypes = {
   DECREMENT: 'DECREMENT',
@@ -21102,7 +21104,8 @@ var actionTypes = {
   CONCENT: 'CONCENT',
   UPDATEITEMS: 'UPDATEITEMS',
   UPDATEFORMNAME: 'UPDATEFORMNAME',
-  SETUSERROLE: 'SETUSERROLE' // REDUCERS
+  SETUSERROLE: 'SETUSERROLE',
+  PATIENTPROFILE: 'PATIENTPROFILE' // REDUCERS
 
 };
 var reducer = function reducer() {
@@ -21183,6 +21186,11 @@ var reducer = function reducer() {
     case actionTypes.SETUSERROLE:
       return Object.assign({}, state, {
         userRole: action.payload
+      });
+
+    case actionTypes.PATIENTPROFILE:
+      return Object.assign({}, state, {
+        patientProfile: action.payload
       });
 
     default:
@@ -21329,6 +21337,14 @@ var setUserRole = function setUserRole(payload) {
   return function (dispatch) {
     return dispatch({
       type: actionTypes.SETUSERROLE,
+      payload: payload
+    });
+  };
+};
+var changePatientProfile = function changePatientProfile(payload) {
+  return function (dispatch) {
+    return dispatch({
+      type: actionTypes.PATIENTPROFILE,
       payload: payload
     });
   };

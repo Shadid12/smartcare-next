@@ -21,6 +21,7 @@ const exampleInitialState = {
   newPatient: {},
   items: [],
   userRole: '',
+  patientProfile: 0
   
 }
 
@@ -41,7 +42,8 @@ export const actionTypes = {
   CONCENT: 'CONCENT',
   UPDATEITEMS: 'UPDATEITEMS',
   UPDATEFORMNAME: 'UPDATEFORMNAME',
-  SETUSERROLE: 'SETUSERROLE'
+  SETUSERROLE: 'SETUSERROLE',
+  PATIENTPROFILE: 'PATIENTPROFILE'
 
 }
 
@@ -116,6 +118,11 @@ export const reducer = (state = exampleInitialState, action) => {
     case actionTypes.SETUSERROLE: 
       return Object.assign({}, state, {
         userRole: action.payload        
+      })
+
+    case actionTypes.PATIENTPROFILE: 
+      return Object.assign({}, state, {
+        patientProfile: action.payload
       })
 
     default: return state
@@ -193,6 +200,10 @@ export const updateFormName = (payload) => dispatch => {
 
 export const setUserRole = (payload) => dispatch => {
   return dispatch({ type: actionTypes.SETUSERROLE, payload: payload })
+}
+
+export const changePatientProfile = (payload) => dispatch => {
+  return dispatch({ type: actionTypes.PATIENTPROFILE, payload: payload })
 }
 
 export function initializeStore (initialState = exampleInitialState) {
