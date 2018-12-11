@@ -202,21 +202,22 @@ class AppBarMain extends React.Component {
         >
           Admin Portal
         </Button>
-      ) : null 
-      
+      ) : null
+
+    const renderNurseButton = 
       this.props.userRole === 'nurse' ?
-      (
-        <Button 
-          variant="contained" 
-          color="secondary" 
-          className={classes.button}
-          onClick={() => {
-            Router.push(`/nurse-actions`);
-          }}
-        >
-          Nurse Portal
-        </Button>
-      ) : null 
+        (
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            className={classes.button}
+            onClick={() => {
+              Router.push(`/nurse-actions`);
+            }}
+          >
+            Nurse Portal
+          </Button>
+        ) : null 
 
 
     const renderMobileMenu = (
@@ -266,6 +267,7 @@ class AppBarMain extends React.Component {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
              {renderAdminButton}
+             {renderNurseButton}
               
               <IconButton color="inherit" onClick={this.handleNoticeMenuOpen}>
                 {

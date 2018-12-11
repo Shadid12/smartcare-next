@@ -5,8 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import Router from 'next/router';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -105,7 +104,11 @@ class SearchTable extends React.Component {
                     {
                         this.state.patients.map(patient => {
                             return(
-                                <ListItem button>
+                                <ListItem button onClick={
+                                    () => {
+                                        Router.push(`/mainflow/nurse/patient-profile?id=${patient._id}`)
+                                    }
+                                }>
                                     <ListItemIcon>
                                         <MdPeople />
                                     </ListItemIcon>
