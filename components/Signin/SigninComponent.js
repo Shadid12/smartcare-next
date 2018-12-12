@@ -55,13 +55,17 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  err: {
+      color: 'red'
+  }
 });
 
 export class SigninComponent extends React.Component {
     state = {
         username: '',
         password: '',
-        loading: false
+        loading: false,
+        err: false
     }
 
     handleForm = () => {
@@ -76,7 +80,11 @@ export class SigninComponent extends React.Component {
                 dispatch(setUserRole(res.data.role))
 
                 Router.push(`/mainflow/main`);
-            });
+            }).catch((err) => {
+                if(err) {
+                    this.setState({err: true, loading: false})
+                }
+            })
     }
 
     handleChange = name => event => {
@@ -97,6 +105,15 @@ export class SigninComponent extends React.Component {
                 <Typography component="h1" variant="h5">
                 Clinician Sign in
                 </Typography>
+
+                {
+                    this.state.err ? (
+                        <Typography variant="h6" className={classes.err}>
+                            Username Password Doesn't Match
+                        </Typography>
+                    ) : null
+                }
+
                 {!this.state.loading ? (
                     <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
