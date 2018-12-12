@@ -15,16 +15,16 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": 5,
+      "id": 8,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
   ],
-  "../styles/main.sass": [
+  "react-table/react-table.css": [
     {
-      "id": "./styles/main.sass",
-      "name": "./styles/main.sass",
+      "id": "./node_modules/react-table/react-table.css",
+      "name": "./node_modules/react-table/react-table.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }

@@ -109,7 +109,6 @@ class AppBarMain extends React.Component {
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
-    console.log('SHow me', this.state.anchorEl);
   };
 
   handleNoticeMenuOpen = event => {

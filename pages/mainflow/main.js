@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import AppBar from '../../components/protected/AppBar'
 
 import ActionPortal from '../../components/Flows/ActionPortal';
+import NurseDashBoard from '../../components/Nurse/NurseDashBoard';
 
 
 class Index extends React.Component {
@@ -17,10 +18,19 @@ class Index extends React.Component {
     return (
       <div>
           <AppBar />
-          <ActionPortal />
+          {
+            this.props.userRole === 'nurse' ? (
+              <NurseDashBoard />
+            ) : <ActionPortal /> 
+          }
       </div>
     )
   }
 }
 
-export default connect()(Index)
+function mapStateToProps (state) {
+  const  { userRole } = state
+  return { userRole }
+}
+
+export default connect(mapStateToProps)(Index)
