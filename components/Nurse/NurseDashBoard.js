@@ -5,6 +5,7 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import styled from "styled-components";
 
 import Column from './Column';
+import FeedbackCol from './FeedbackCol';
 
 import initialData from './data';
 
@@ -14,6 +15,10 @@ const styles = theme => ({
 
 const Container = styled.div`
   display: flex;
+`;
+
+const MainWrapper = styled.div`
+    display: flex;
 `;
 
 
@@ -91,20 +96,23 @@ class NurseDashBoard extends Component {
   render () {
     const { classes } = this.props
     return (
-        <DragDropContext
-            onDragEnd={this.onDragEnd}
-        >
-            <Container>
-                {
-                    this.state.data.columnOrder.map((columnId) => {
-                        const column = this.state.data.columns[columnId];
-                        //tasks in that column
-                        const tasks = column.taskIds.map(taskId => this.state.data.tasks[taskId]);
-                        return <Column key={column.id} column={column} tasks={tasks} />;
-                    })
-                }
-            </Container>
-        </DragDropContext>
+        <MainWrapper>
+            <DragDropContext
+                onDragEnd={this.onDragEnd}
+            >
+                <Container>
+                    {
+                        this.state.data.columnOrder.map((columnId) => {
+                            const column = this.state.data.columns[columnId];
+                            //tasks in that column
+                            const tasks = column.taskIds.map(taskId => this.state.data.tasks[taskId]);
+                            return <Column key={column.id} column={column} tasks={tasks} />;
+                        })
+                    }
+                </Container>
+            </DragDropContext>
+            <FeedbackCol />
+        </MainWrapper>
     )
   }
 }
