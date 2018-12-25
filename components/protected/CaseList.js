@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux'
 import ListItem from '@material-ui/core/ListItem'
@@ -30,13 +30,20 @@ const styles = theme => ({
 class CaseList extends React.Component {
 
     state = {
-        patients: []
+        patients: [],
+        requests: []
     }
 
 componentDidMount() {
-    axios.get('https://smartapinode.herokuapp.com/users/patients')
+    axios.get('https://smartapinode.herokuapp.com/cases')
         .then((res) => {
-            this.setState({patients: res.data.patients})
+            this.setState({patients: res.data.cases})
+        })
+    const token = window.localStorage.getItem('token');
+    axios.get('https://smartapinode.herokuapp.com/cases/my', 
+    { headers: {"Authorization" : `Bearer ${token}`} })
+        .then(res => {
+            this.setState({requests: res.data.cases})
         })
 }
   
@@ -49,10 +56,40 @@ render() {
                 spacing={24}
                 className={classes.container}
             >
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                     <Paper className={classes.root} elevation={1}>
+                            <Typography variant="h5" component="h3">
+                                Patients Seeking Care
+                            </Typography>
                         {
                             this.state.patients.map((aPatient) => {
+                                return(
+                                    <ListItem>
+                                        <Avatar>
+                                            <ImageIcon />
+                                        </Avatar>
+                                        <ListItemText 
+                                            primary={`${aPatient.firstName} ${aPatient.lastName}`} 
+                                            secondary="July 9, 1994" 
+                                        />
+                                        <Button variant="contained" className={classes.btnContainer}>
+                                            Request
+                                        </Button>
+                                    </ListItem>
+                                )
+                            })
+                        }
+                    </Paper>
+                </Grid>
+
+
+                <Grid item xs={4}>
+                    <Paper className={classes.root} elevation={1}>
+                            <Typography variant="h5" component="h3">
+                                Patients Requested Your Care
+                            </Typography>
+                        {
+                            this.state.requests.map((aPatient) => {
                                 return(
                                     <ListItem>
                                         <Avatar>
@@ -85,8 +122,8 @@ CaseList.propTypes = {
 };
 
 function mapStateToProps (state) {
-    const  { userRole } = state
-    return { userRole }
+    const  { userRole, userId } = state
+    return { userRole, userId }
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(CaseList));

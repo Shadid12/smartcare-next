@@ -21,6 +21,7 @@ const exampleInitialState = {
   newPatient: {},
   items: [],
   userRole: '',
+  userId: '',
   patientProfile: 0
   
 }
@@ -43,7 +44,8 @@ export const actionTypes = {
   UPDATEITEMS: 'UPDATEITEMS',
   UPDATEFORMNAME: 'UPDATEFORMNAME',
   SETUSERROLE: 'SETUSERROLE',
-  PATIENTPROFILE: 'PATIENTPROFILE'
+  PATIENTPROFILE: 'PATIENTPROFILE',
+  SETUSERID: 'SETUSERID'
 
 }
 
@@ -125,6 +127,11 @@ export const reducer = (state = exampleInitialState, action) => {
         patientProfile: action.payload
       })
 
+    case actionTypes.SETUSERID:
+      return Object.assign({}, state, {
+        userId: action.payload
+      })
+
     default: return state
   }
 }
@@ -200,6 +207,10 @@ export const updateFormName = (payload) => dispatch => {
 
 export const setUserRole = (payload) => dispatch => {
   return dispatch({ type: actionTypes.SETUSERROLE, payload: payload })
+}
+
+export const setUserId = (payload) => dispatch => {
+  return dispatch({type: actionTypes.SETUSERID, payload: payload})
 }
 
 export const changePatientProfile = (payload) => dispatch => {

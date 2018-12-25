@@ -22,7 +22,8 @@ import Loader from './Loader';
 
 // action
 import { 
-    setUserRole
+    setUserRole,
+    setUserId
 } from '../../store'
 
 const styles = theme => ({
@@ -78,6 +79,7 @@ export class SigninComponent extends React.Component {
                 window.localStorage.setItem('token', res.data.token);
                 const {dispatch} = this.props
                 dispatch(setUserRole(res.data.role))
+                dispatch(setUserId(res.data._id))
 
                 Router.push(`/mainflow/main`);
             }).catch((err) => {
