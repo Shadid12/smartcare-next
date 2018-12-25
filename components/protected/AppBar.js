@@ -17,6 +17,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 
 
 // action
@@ -92,6 +93,9 @@ const styles = theme => ({
       display: 'none',
     },
   },
+  helloMsg: {
+    paddingLeft: '10px'
+  }
 });
 
 class AppBarMain extends React.Component {
@@ -106,6 +110,12 @@ class AppBarMain extends React.Component {
     open: false,
     show: true
   };
+
+  componentDidMount() {
+    console.log('Is this working man');
+    const socket = io('http://localhost:3001');
+    socket.emit('RECIEVE_UPDATE', {data: 'SOme User'})
+  }
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -211,10 +221,10 @@ class AppBarMain extends React.Component {
             color="secondary" 
             className={classes.button}
             onClick={() => {
-              Router.push(`/nurse-actions`);
+              Router.push(`/`);
             }}
           >
-            Nurse Portal
+            View Patients Seeking Care
           </Button>
         ) : null 
 
@@ -256,11 +266,14 @@ class AppBarMain extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               Smart Care
+            </Typography>
+            <Typography className={classes.helloMsg} variant="span" color="inherit" noWrap>
+              Hello, [UserName]
             </Typography>
             
             <div className={classes.grow} />

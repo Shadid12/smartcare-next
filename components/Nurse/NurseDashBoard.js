@@ -111,7 +111,6 @@ class NurseDashBoard extends Component {
                     }
                 </Container>
             </DragDropContext>
-            <FeedbackCol />
         </MainWrapper>
     )
   }
