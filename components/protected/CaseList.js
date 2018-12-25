@@ -10,7 +10,9 @@ import Avatar from '@material-ui/core/Avatar'
 import ImageIcon from '@material-ui/icons/Image'
 import { Button } from '@material-ui/core'
 import ListItemText from '@material-ui/core/ListItemText'
+import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios'
+import Router from 'next/router'
 
 const styles = theme => ({
   root: {
@@ -24,6 +26,9 @@ const styles = theme => ({
   },
   btnContainer: {
     marginRight: '10px'
+  },
+  btnMain: {
+      borderRadius: '50px'
   }
 });
 
@@ -65,13 +70,20 @@ render() {
                             this.state.patients.map((aPatient) => {
                                 return(
                                     <ListItem>
-                                        <Avatar>
-                                            <ImageIcon />
-                                        </Avatar>
-                                        <ListItemText 
-                                            primary={`${aPatient.firstName} ${aPatient.lastName}`} 
-                                            secondary="July 9, 1994" 
-                                        />
+                                        <IconButton 
+                                            className={classes.btnMain}
+                                            onClick={() => {
+                                                Router.push(`/mainflow/users/profile?id=${aPatient._id}`)
+                                            }}
+                                        >
+                                            <Avatar>
+                                                <ImageIcon />
+                                            </Avatar>
+                                            <ListItemText 
+                                                primary={`${aPatient.firstName} ${aPatient.lastName}`} 
+                                                secondary="July 9, 1994" 
+                                            />
+                                        </IconButton>
                                         <Button variant="contained" className={classes.btnContainer}>
                                             Request
                                         </Button>
@@ -92,13 +104,15 @@ render() {
                             this.state.requests.map((aPatient) => {
                                 return(
                                     <ListItem>
-                                        <Avatar>
-                                            <ImageIcon />
-                                        </Avatar>
-                                        <ListItemText 
-                                            primary={`${aPatient.firstName} ${aPatient.lastName}`} 
-                                            secondary="July 9, 1994" 
-                                        />
+                                        <IconButton className={classes.btnMain}>
+                                            <Avatar>
+                                                <ImageIcon />
+                                            </Avatar>
+                                            <ListItemText 
+                                                primary={`${aPatient.firstName} ${aPatient.lastName}`} 
+                                                secondary="July 9, 1994" 
+                                            />
+                                        </IconButton>
                                         <Button variant="contained" color="primary" className={classes.btnContainer}>
                                             Accept
                                         </Button>

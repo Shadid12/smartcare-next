@@ -1,4 +1,5 @@
 const routes = require('next-routes')
 
-module.exports = routes()                           
-.add('about', '/:id')                               
+routes.add('/mainflow/users/profile/:id')
+
+module.exports = routes()                                                        

@@ -22,6 +22,10 @@
     "/mainflow/nurse/case": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
+    ],
+    "/mainflow/users/profile": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }
