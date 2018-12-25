@@ -9,7 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -18,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 // action
@@ -108,13 +108,14 @@ class AppBarMain extends React.Component {
       'Other Notice'
     ],
     open: false,
-    show: true
+    show: true,
+    processing: false
   };
 
+
   componentDidMount() {
-    console.log('Is this working man');
-    const socket = io('http://localhost:3001');
-    socket.emit('RECIEVE_UPDATE', {data: 'SOme User'})
+    // const socket = io('http://localhost:3001');
+    // socket.emit('RECIEVE_UPDATE', {data: 'SOme User'})
   }
 
   handleProfileMenuOpen = event => {
@@ -221,7 +222,10 @@ class AppBarMain extends React.Component {
             color="secondary" 
             className={classes.button}
             onClick={() => {
-              Router.push(`/`);
+              if(Router.route !== '/mainflow/nurse/case') {
+                this.setState({ processing: true})
+              }
+              Router.push(`/mainflow/nurse/case`)
             }}
           >
             View Patients Seeking Care
@@ -313,7 +317,11 @@ class AppBarMain extends React.Component {
         {renderMenu}
         {renderMobileMenu}
         {renderNotice}
-        
+        {
+          this.state.processing ? (
+            <LinearProgress color="secondary" />
+          ) : null
+        }
       </div>
     );
   }
