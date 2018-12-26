@@ -1,12 +1,11 @@
 import {connect} from 'react-redux'
 import { withRouter } from 'next/router'
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar'
-
+import axios from 'axios';
 
 const styles = theme => ({
     root: {
@@ -28,9 +27,17 @@ const styles = theme => ({
 
 class UserProfile extends React.Component  {
     
+    state = {
+
+    }
 
     componentWillMount() {
-        console.log('R', this.props.router.query.id)
+        const token = window.localStorage.getItem('token');
+        axios.get(`https://smartapinode.herokuapp.com/cases/my/${this.props.router.query.id}`,
+        { headers: {"Authorization" : `Bearer ${token}`} })
+            .then((res) => {
+                console.log(res.data)
+        })
     }
 
     render() {
@@ -51,7 +58,7 @@ class UserProfile extends React.Component  {
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
                             <Typography variant="h6" component="h3">
-                                    Basic Infor
+                                    Basic Information
                             </Typography>
                         </Paper>
                     </Grid>

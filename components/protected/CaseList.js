@@ -104,7 +104,12 @@ render() {
                             this.state.requests.map((aPatient) => {
                                 return(
                                     <ListItem>
-                                        <IconButton className={classes.btnMain}>
+                                        <IconButton 
+                                            className={classes.btnMain}
+                                            onClick={() => {
+                                                Router.push(`/mainflow/users/profile?id=${aPatient._id}`)
+                                            }}
+                                        >
                                             <Avatar>
                                                 <ImageIcon />
                                             </Avatar>
