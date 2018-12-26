@@ -4,6 +4,7 @@ import AppBar from '../../components/protected/AppBar'
 
 import ActionPortal from '../../components/Flows/ActionPortal';
 import NurseDashBoard from '../../components/Nurse/NurseDashBoard';
+import PatientDash from '../../components/Patient/PatientDash';
 
 
 class Index extends React.Component {
@@ -21,7 +22,17 @@ class Index extends React.Component {
           {
             this.props.userRole === 'nurse' ? (
               <NurseDashBoard />
-            ) : <ActionPortal /> 
+            ) : null
+          }
+          {
+            this.props.userRole === 'admin' ? (
+              <ActionPortal /> 
+            ) : null
+          }
+          {
+            this.props.userRole === 'patient' ? (
+              <PatientDash />
+            ) : null
           }
       </div>
     )

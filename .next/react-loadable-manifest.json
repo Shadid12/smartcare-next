@@ -15,7 +15,19 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
+      "id": 6,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
       "id": 7,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 8,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
@@ -25,6 +37,22 @@
     {
       "id": "./node_modules/react-table/react-table.css",
       "name": "./node_modules/react-table/react-table.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "react-date-range/dist/styles.css": [
+    {
+      "id": "./node_modules/react-date-range/dist/styles.css",
+      "name": "./node_modules/react-date-range/dist/styles.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "react-date-range/dist/theme/default.css": [
+    {
+      "id": "./node_modules/react-date-range/dist/theme/default.css",
+      "name": "./node_modules/react-date-range/dist/theme/default.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
